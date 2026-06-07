@@ -50,8 +50,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function scheduleNextPopupTicks() {
-    const intervals =;
-    const randomInterval = intervals[Math.floor(Math.random() * intervals.length)];
+    const choice = Math.floor(Math.random() * 3);
+    let randomInterval = 10000;
+    
+    if (choice === 1) {
+      randomInterval = 20000;
+    } else if (choice === 2) {
+      randomInterval = 30000;
+    }
 
     setTimeout(() => {
       chrome.runtime.sendMessage({ action: "tickHunger" }, () => {
