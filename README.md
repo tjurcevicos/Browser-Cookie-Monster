@@ -10,7 +10,7 @@ An interactive, gamified tab-state privacy utility and active session manager fo
 Developed by **Tomislav Jurčević** (2026).
 
 <p align="center">
-  <img src="https://unsplash.com" alt="Cookie Monster Theme" width="420">
+  <img src="Browser_Cookie_Monster.jpg" alt="Cookie Monster Theme" width="420">
 </p>
 
 ## ⚠️ Intellectual Property & Commercial Licensing
