@@ -49,6 +49,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  function scheduleNextPopupTicks() {
+    const intervals =;
+    const randomInterval = intervals[Math.floor(Math.random() * intervals.length)];
+
+    setTimeout(() => {
+      chrome.runtime.sendMessage({ action: "tickHunger" }, () => {
+        updateHealthBar(); 
+        updateCookieUI();
+        scheduleNextPopupTicks();
+      });
+    }, randomInterval);
+  }
+
   addWhitelistBtn.addEventListener('click', () => {
     const value = whitelistInput.value.trim();
     if (!value) return;
@@ -105,5 +118,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateCookieUI();
   displayWhitelist();
   updateHealthBar();
+  scheduleNextPopupTicks();
   setInterval(updateHealthBar, 1000);
 });
