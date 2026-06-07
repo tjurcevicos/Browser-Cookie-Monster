@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h3>Browser Cookie Monster™ 🍪</h3>
+  
+  <div id="monster-container">
+    <img id="monster" src="icon.png" class="idle" alt="Monster">
+    <div class="progress-bar">
+      <div id="health-bar" style="width: 100%;"></div>
+    </div>
+    <p id="cookie-count">Cookies on this page: 0</p>
+  </div>
+
+  <button id="rage-btn">🔥 RAGE MODE</button>
+  
+  <div class="whitelist-section">
+    <input type="text" id="whitelist-input" placeholder="e.g. google.com">
+    <button id="add-whitelist">Add</button>
+    <p class="whitelist-note">🥦 Eww, these taste like broccoli!</p>
+    <ul id="whitelist-list"></ul>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

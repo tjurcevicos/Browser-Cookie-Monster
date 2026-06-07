@@ -1,0 +1,83 @@
+body {
+  width: 250px;
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  text-align: center;
+}
+#monster {
+  width: 80px;
+  height: 80px;
+  transition: transform 0.2s;
+  margin-bottom: 10px;
+}
+.eating {
+  animation: chew 0.3s infinite;
+}
+@keyframes chew {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1); }
+}
+.rage {
+  animation: shake 0.1s infinite;
+  transform: scale(1.2);
+}
+@keyframes shake {
+  0% { transform: scale(1.2) translate(1px, 1px); }
+  50% { transform: scale(1.2) translate(-1px, -2px); }
+  100% { transform: scale(1.2) translate(1px, 1px); }
+}
+.progress-bar {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+#health-bar {
+  height: 15px;
+  background-color: #4CAF50;
+  border-radius: 5px;
+  transition: background-color 0.5s;
+}
+#rage-btn {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 3px;
+  margin-bottom: 15px;
+}
+.whitelist-section {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  text-align: left;
+}
+#whitelist-input {
+  width: 150px;
+  padding: 5px;
+}
+#add-whitelist {
+  padding: 5px;
+  cursor: pointer;
+}
+#whitelist-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+  max-height: 80px;
+  overflow-y: auto;
+}
+#whitelist-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  font-size: 12px;
+}
+.remove-btn {
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+}

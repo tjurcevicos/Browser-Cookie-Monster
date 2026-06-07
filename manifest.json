@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Browser Cookie Monster™",
+  "version": "1.0.0",
+  "description": "Browser Cookie Monster™ with a stochastic health bar and Rage Mode framework",
+  "permissions": [
+    "cookies",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
