@@ -61,10 +61,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     setTimeout(() => {
       chrome.runtime.sendMessage({ action: "tickHunger" }, () => {
-        if (chrome.runtime.lastError) {
-          scheduleNextPopupTicks();
-          return;
-        }
         updateHealthBar(); 
         updateCookieUI();
         scheduleNextPopupTicks();
