@@ -2,29 +2,50 @@ let currentHealth = 100;
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.set({ monsterHealth: currentHealth });
-  scheduleNextHungerTicks();
+  setupBackgroundAlarm();
 });
 
-function scheduleNextHungerTicks() {
-  const intervals = [10000, 20000, 30000];
-  const randomInterval = intervals[Math.floor(Math.random() * intervals.length)];
+chrome.runtime.onStartup.addListener(() => {
+  setupBackgroundAlarm();
+});
 
-  setTimeout(() => {
-    chrome.storage.local.get(['monsterHealth'], ({ monsterHealth }) => {
-      if (monsterHealth !== undefined) {
-        currentHealth = monsterHealth;
-      }
-      if (currentHealth > 0) {
-        currentHealth -= 1;
-        chrome.storage.local.set({ monsterHealth: currentHealth });
-        
+function setupBackgroundAlarm() {
+  chrome.alarms.create('hungerAlarm', { periodInMinutes: 1 });
+}
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "tickHunger") {
+    processHealthReduction(1, sendResponse);
+    return true;
+  }
+});
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === 'hungerAlarm') {
+    processHealthReduction(3); 
+  }
+});
+
+function processHealthReduction(reductionAmount, sendResponse) {
+  chrome.storage.local.get(['monsterHealth'], ({ monsterHealth }) => {
+    if (monsterHealth !== undefined) {
+      currentHealth = monsterHealth;
+    }
+    
+    if (currentHealth > 0) {
+      currentHealth = Math.max(0, currentHealth - reductionAmount);
+      chrome.storage.local.set({ monsterHealth: currentHealth }, () => {
+        if (sendResponse) {
+          sendResponse({ success: true, health: currentHealth });
+        }
         if (currentHealth < 30) {
           checkAndAutoEat();
         }
-      }
-      scheduleNextHungerTicks();
-    });
-  }, randomInterval);
+      });
+    } else if (sendResponse) {
+      sendResponse({ success: true, health: currentHealth });
+    }
+  });
 }
 
 function checkAndAutoEat() {
@@ -54,8 +75,6 @@ function checkAndAutoEat() {
           });
         }
       });
-    } catch {
-      
-    }
+    } catch {}
   });
 }
